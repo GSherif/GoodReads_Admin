@@ -1,33 +1,150 @@
-.App {
-  text-align: center;
+/*---------------------General--------------------------*/
+
+fieldset, .userbooksfilter {
+  padding: 20px;
+  height: fit-content;
+  box-shadow: 0px 0px 0px 0px transparent;
+  border: .5px solid rgb(231, 230, 230);
+  margin-top: 90px;
+  margin-bottom: 10px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.userbooksfilter {
+  height: 29.3rem;
+  margin-top: 113px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.filter_link:hover {
+  cursor: pointer;
+}
+
+.legend {
+  max-width: fit-content;
+  border: 1px solid rgb(231, 230, 230);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.table_bookImg {
+  height: 5%;
+}
+
+.bg-darkgrey {
+  background-color: rgb(58, 80, 107, 0.9);
+}
+
+.bg-mint {
+  background-color: #5BC0BE;
+}
+
+.l-white {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.l-white:hover {
+  color: #1C2541;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.text-mint {
+  color: #5BC0BE;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(28, 37, 65);
+  color: white;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.mt-7 {
+  margin-top: 7%;
+}
+.tabs
+{
+  margin-top: 73px;
+}
+.edit:before
+{
+  margin-right: 37px;
+}
+.tab-content
+{
+  
+  margin-bottom: 60px;
+
+}
+.userProfile
+{
+  margin-bottom: 75px;
+}
+/*---------------------Navbar--------------------------*/
+
+.Navbar {
+  margin-bottom: 500px;
+  background-color: rgb(28, 37, 65, 0.8);
+}
+
+.link-white {
+  color: white;
+}
+
+.link-white:hover {
+  color: #5BC0BE;
+  text-decoration: none;
+}
+
+.link-mint {
+  color: #5BC0BE;
+}
+
+.link-mint:hover {
+  color: rgb(28, 37, 65);
+  text-decoration: none;
+}
+
+/*---------------------forms--------------------------*/
+
+.form-border {
+  border: 2px solid #3A506B;
+  padding: 2rem;
+  border-radius: 30px;
+}
+
+.login {
+  width: 40%;
+  margin: 12% auto;
+}
+
+.signup {
+  width: 50%;
+  margin: 7% auto;
+}
+
+.login-btn:hover, .button-submit:hover, .category-btn:hover {
+  background-color: #5BC0BE;
+  border-color: white;
+  color: #1C2541;
+  text-decoration: none;
+}
+
+.login-btn, .button-submit, .category-btn {
+  background-color: #5BC0BE;
+  border: 1px solid white;
+  color: white;
+  padding: 0.3rem 4rem;
+}
+
+.custom-file {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: calc(1.5em + .75rem + 2px);
+  margin: 0;
 }
