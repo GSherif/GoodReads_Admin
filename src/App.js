@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import Routing from '../src/RouterModule/Router';
 
 export const context = React.createContext();
