@@ -16,8 +16,6 @@ export default class LoginForm extends Component {
     }
 
     handleSubmit = () => {
-        // e.preventDefault(); 
-        // if (!(this.state.email && this.state.password)) return;
         const { username, password } = this.state;
         debugger;
         login({ username, password })
@@ -25,20 +23,9 @@ export default class LoginForm extends Component {
                 localStorage.setItem('token', res.token);
                 this.props.history.push('/admin');
             })
-        .catch(err => {
+            .catch(err => {
 
-        })
-        // value.checkUser(user);
-        // console.log(value.loggedUser);
-        // if (value.loggedUser.admin === true) {
-        //     this.props.history.push('/admin');
-        // }
-        // else if (value.loggedUser.admin === false) {
-        //     this.props.history.push('/userProfile');
-        // }
-        // else {
-        //     this.props.history.push('/categories');
-        // }
+            })
     }
 
     render() {
@@ -46,7 +33,7 @@ export default class LoginForm extends Component {
         return (
             <Form className='login bg-darkgrey form-border' onSubmit={this.handleSubmit()}>
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label className="text-white">Email address</Form.Label>
+                    <Form.Label className="text-white">Username</Form.Label>
                     <Form.Control type="text" name="username" placeholder="Enter username" value={username} onChange={this.handleChange('username')} />
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
