@@ -9,7 +9,7 @@ const Header = (props) => {
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto">
-					<h1><b>Good</b><i>Reads</i></h1>
+					<h1 className="text-light"><b>Good</b>Reads</h1>
 				</Nav>
 				<Form inline>
 					<FormControl type="text" placeholder="Search" className="mr-sm-2 search" />

@@ -16,13 +16,13 @@ export default class AdminPanel extends React.Component {
             <Container fluid={true} className="p-2 tabs">
                 <Tabs className="link-mint" activekey={this.state.key} onSelect={key => this.setState({ key })}>
                     <Tab eventKey="category" title="Categories">
-                        <Categories />
+                        {/* <Categories /> */}
                     </Tab>
                     <Tab eventKey="books" title="Books">
                         <Books />
                     </Tab>
                     <Tab eventKey="authors" title="Authors">
-                        <Authors />
+                        {/* <Authors /> */}
                     </Tab>
                 </Tabs>
             </Container>
