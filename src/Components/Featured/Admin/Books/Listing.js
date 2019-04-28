@@ -1,10 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 import { Container, Row, Col, Button, Table } from 'react-bootstrap';
-import { context } from '../../../../App'
-    ;
+import { context } from '../../../../App';
 
 import BookAdminCard from './Card';
 import AddBookForm from './AddEdit';
+import LoaderGIF from '../../../Shared/Loader/Loader';
 export default class BooksAdminListing extends React.Component {
     constructor() {
         super();
@@ -14,6 +15,7 @@ export default class BooksAdminListing extends React.Component {
         }
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
+        this.updateBooks = this.updateBooks.bind(this);
     }
     handleClose = () => {
         this.setState({ showAddModal: false });
@@ -21,9 +23,30 @@ export default class BooksAdminListing extends React.Component {
     handleShow = () => {
         this.setState({ showAddModal: true })
     }
+    componentDidMount() {
+        debugger;
+        axios.get(`http://localhost:3000/api/books/`)
+            .then(data => {
+                this.setState({ books: data });
+            })
+            .catch(err => {
+                // this.props.history.push('/error');
+                console.log(err);
+            });
+    }
+    updateBooks() {
+        axios.get(`http://localhost:3000/api/books/`)
+            .then(data => {
+                this.setState({ books: data });
+            })
+            .catch(err => {
+                // this.props.history.push('/error');
+                console.log(err);
+            });
+    }
     render() {
         return (
-
+            // !this.state.books.length ? LoaderGIF :
             <Container fluid={true} className="p-2">
                 {this.state.showAddModal && <AddBookForm show={this.state.showAddModal} onHide={this.handleClose} editmode={false} />}
                 <Row className="no-gutters m-1 d-flex flex-row-reverse">
@@ -43,13 +66,12 @@ export default class BooksAdminListing extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.books.filter(b => b.deleted === false).map(b => <BookAdminCard {...b} key={b.id} />)}
+                                {this.state.books.filter(b => b.deleted === false).map(b => <BookAdminCard {...b} key={b._id} update={this.updateBooks} />)}
                             </tbody>
                         </Table>
                     </Col>
                 </Row>
             </Container>
-
         );
     }
 }
