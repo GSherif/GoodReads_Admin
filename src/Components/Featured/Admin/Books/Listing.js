@@ -27,9 +27,11 @@ export default class BooksAdminListing extends React.Component {
         debugger;
         axios.get(`http://localhost:3000/api/books/`)
             .then(data => {
+                debugger;
                 this.setState({ books: data });
             })
             .catch(err => {
+                debugger;
                 // this.props.history.push('/error');
                 console.log(err);
             });
@@ -46,7 +48,6 @@ export default class BooksAdminListing extends React.Component {
     }
     render() {
         return (
-            // !this.state.books.length ? LoaderGIF :
             <Container fluid={true} className="p-2">
                 {this.state.showAddModal && <AddBookForm show={this.state.showAddModal} onHide={this.handleClose} editmode={false} />}
                 <Row className="no-gutters m-1 d-flex flex-row-reverse">
@@ -66,7 +67,8 @@ export default class BooksAdminListing extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.books.filter(b => b.deleted === false).map(b => <BookAdminCard {...b} key={b._id} update={this.updateBooks} />)}
+                                {!this.state.books.length ? <LoaderGIF /> :
+                                    this.state.books.filter(b => b.deleted === false).map(b => <BookAdminCard {...b} key={b._id} update={this.updateBooks} />)}
                             </tbody>
                         </Table>
                     </Col>
