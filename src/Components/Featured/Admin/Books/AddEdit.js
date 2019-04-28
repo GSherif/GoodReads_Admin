@@ -105,50 +105,52 @@ export default class AddEditBookForm extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     {!this.state.Categories.length ? <LoaderGIF /> :
-                        <Form onSubmit={this.handleSubmit}>
-                            <Form.Group controlId="title">
-                                <Form.Label>Book Name</Form.Label>
-                                <Form.Control
-                                    placeholder="Enter Book Name"
-                                    name="title"
-                                    value={this.state.title} onChange={this.handleChange}
-                                    isValid={!this.state.errors.find(e => e.name === "title")}
-                                    isInvalid={this.state.errors.find(e => e.name === "title")} />
-                                <Form.Control.Feedback type="valid">Looks Good!</Form.Control.Feedback>
-                                <Form.Control.Feedback type="invalid">Title must be between 3-50 characters!</Form.Control.Feedback>
-                            </Form.Group>
+                        <>
+                            <Form onSubmit={this.handleSubmit}>
+                                <Form.Group controlId="title">
+                                    <Form.Label>Book Name</Form.Label>
+                                    <Form.Control
+                                        placeholder="Enter Book Name"
+                                        name="title"
+                                        value={this.state.title} onChange={this.handleChange}
+                                        isValid={!this.state.errors.find(e => e.name === "title")}
+                                        isInvalid={this.state.errors.find(e => e.name === "title")} />
+                                    <Form.Control.Feedback type="valid">Looks Good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid">Title must be between 3-50 characters!</Form.Control.Feedback>
+                                </Form.Group>
 
-                            <Form.Group as={Col}>
-                                <Form.Label>Category</Form.Label>
-                                <Form.Control as="select" name="categoryId" onChange={this.handleChange} value={this.state.categoryId}>
-                                    <option key="0" value="0">Choose Category ...</option>
-                                    {
-                                        this.state.Categories.filter(c => c.deleted === false).map(c => <option key={c._id} value={c._id}>{c.name}</option>)
-                                    }
-                                </Form.Control>
-                            </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Category</Form.Label>
+                                    <Form.Control as="select" name="categoryId" onChange={this.handleChange} value={this.state.categoryId}>
+                                        <option key="0" value="0">Choose Category ...</option>
+                                        {
+                                            this.state.Categories.filter(c => c.deleted === false).map(c => <option key={c._id} value={c._id}>{c.name}</option>)
+                                        }
+                                    </Form.Control>
+                                </Form.Group>
 
-                            <Form.Group as={Col}>
-                                <Form.Label>Author</Form.Label>
-                                <Form.Control as="select" name="authorId" onChange={this.handleChange} value={this.state.authorId}>
-                                    <option key="0" value="0">Choose Author ...</option>
-                                    {
-                                        this.state.Authors.filter(a => a.deleted === false).map(a => <option key={a._id} value={a._id}>{a.firstName + ' ' + a.lastName}</option>)
-                                    }
-                                </Form.Control>
-                            </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Author</Form.Label>
+                                    <Form.Control as="select" name="authorId" onChange={this.handleChange} value={this.state.authorId}>
+                                        <option key="0" value="0">Choose Author ...</option>
+                                        {
+                                            this.state.Authors.filter(a => a.deleted === false).map(a => <option key={a._id} value={a._id}>{a.firstName + ' ' + a.lastName}</option>)
+                                        }
+                                    </Form.Control>
+                                </Form.Group>
 
-                            <Form.Group controlId="photoURL">
-                                <Form.Label>Book Cover</Form.Label>
-                                <Form.Control
-                                    placeholder="Enter Photo URL"
-                                    name="cover"
-                                    value={this.state.cover} onChange={this.handleChange}
-                                    isInvalid={this.state.errors.find(e => e.name === "cover")} />
-                                <Form.Control.Feedback type="invalid">Invalid URL!</Form.Control.Feedback>
-                            </Form.Group>
+                                <Form.Group controlId="photoURL">
+                                    <Form.Label>Book Cover</Form.Label>
+                                    <Form.Control
+                                        placeholder="Enter Photo URL"
+                                        name="cover"
+                                        value={this.state.cover} onChange={this.handleChange}
+                                        isInvalid={this.state.errors.find(e => e.name === "cover")} />
+                                    <Form.Control.Feedback type="invalid">Invalid URL!</Form.Control.Feedback>
+                                </Form.Group>
 
-                        </Form>
+                            </Form>
+                        </>
                     }
                 </Modal.Body>
                 <Modal.Footer>

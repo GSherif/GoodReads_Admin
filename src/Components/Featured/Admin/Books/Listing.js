@@ -67,7 +67,12 @@ export default class BooksAdminListing extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {!this.state.books.length ? <LoaderGIF /> :
+                                {!this.state.books.length ?
+                                    <>
+                                        <tr colSpan={12}>
+                                            <td colSpan={12}><LoaderGIF /></td>
+                                        </tr>
+                                    </> :
                                     this.state.books.filter(b => b.deleted === false).map(b => <BookAdminCard {...b} key={b._id} update={this.updateBooks} />)}
                             </tbody>
                         </Table>
