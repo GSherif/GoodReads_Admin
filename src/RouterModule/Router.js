@@ -13,8 +13,8 @@ export default class Routing extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/" component={LoginForm} />
-          <Route exact path="/admin" component={AdminPanel} />
           <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/admin" component={AdminPanel} />
         </Switch>
         <Footer />
       </Router>
