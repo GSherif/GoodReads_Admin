@@ -6,6 +6,8 @@ import { context } from '../../../../App';
 import BookAdminCard from './Card';
 import AddBookForm from './AddEdit';
 import LoaderGIF from '../../../Shared/Loader/Loader';
+import { GetAllBooks } from '../../../../API/Book';
+
 export default class BooksAdminListing extends React.Component {
     constructor() {
         super();
@@ -25,26 +27,10 @@ export default class BooksAdminListing extends React.Component {
     }
     componentDidMount() {
         debugger;
-        axios.get(`http://localhost:3000/api/books/`)
-            .then(data => {
-                debugger;
-                this.setState({ books: data });
-            })
-            .catch(err => {
-                debugger;
-                // this.props.history.push('/error');
-                console.log(err);
-            });
+        this.setState({ books: GetAllBooks() });
     }
     updateBooks() {
-        axios.get(`http://localhost:3000/api/books/`)
-            .then(data => {
-                this.setState({ books: data });
-            })
-            .catch(err => {
-                // this.props.history.push('/error');
-                console.log(err);
-            });
+        this.setState({ books: GetAllBooks() });
     }
     render() {
         return (
