@@ -11,8 +11,8 @@ export default class AddEditBookForm extends React.Component {
         //initial values from end points when mounting??
         this.state = {
             title: this.props.editmode ? this.props.title : "",
-            authorId: this.props.editmode ? this.props.authorId : "0",
-            categoryId: this.props.editmode ? this.props.categoryId : "0",
+            authorId: this.props.editmode ? this.props.authorId._id : "0",
+            categoryId: this.props.editmode ? this.props.categoryId._id : "0",
             cover: this.props.editmode ? this.props.cover : "",
             errors: [],
             // Categories: [],

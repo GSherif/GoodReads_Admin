@@ -36,6 +36,7 @@ export default class BookAdminCard extends React.Component {
             });
     }
     render() {
+        console.log(this.props);
         return (
             <React.Fragment>
                 <tr className="no-gutters text-center">
