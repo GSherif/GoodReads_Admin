@@ -5,14 +5,11 @@ import axios from 'axios';
 import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 
 import { context } from '../../../../App';
-import { GetAllBooks } from '../../../../API/Book';
 import { server, GetAllBooks } from '../../../../API/Book';
-import LoaderGIF from '../../../Shared/Loader/Loader';
 import LoaderGIF from '../../../Shared/Loader/Loader';
 
 import AddBookForm from './AddEdit';
 import BookAdminCard from './Card';
->>>>>>> ac73359bc2424d4e83c4850f598e4fbe0c0df21e
 
 export default class BooksAdminListing extends React.Component {
     constructor() {
