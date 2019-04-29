@@ -10,16 +10,16 @@ import uuidv1 from 'uuid/v1';
 export default class AddEditAuthorForm extends React.Component {
   constructor(props) {
     super(props);
-    if (this.props.editmode) {
-      this.state = {
-        firstname: this.props.editmode ? this.props.firstname : "",
-        lastname: this.props.editmode ? this.props.lastname : "",
-        photourl: this.props.editmode ? this.props.photourl : "",
-        birthdate: this.props.editmode ? this.props.birthdate : "",
-        errors: [],
 
-      };
-    }
+    this.state = {
+      firstname: this.props.editmode ? this.props.firstname : "",
+      lastname: this.props.editmode ? this.props.lastname : "",
+      photourl: this.props.editmode ? this.props.photourl : "",
+      birthdate: this.props.editmode ? this.props.birthdate : "",
+      errors: [],
+
+    };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -28,7 +28,6 @@ export default class AddEditAuthorForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const newAuthor = {
-      id: uuidv1(),
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       photourl: this.state.photourl,
@@ -56,13 +55,10 @@ export default class AddEditAuthorForm extends React.Component {
     if (formValidatorCtx.validationErrors().length === 0) {
       if (this.props.editmode) {
         // edit function
-        newAuthor.id = this.props.id;
-        editauthor({ ...newAuthor })
+        newAuthor._id = this.props._id;
+        editauthor(newAuthor)
           .then((res) => {
             this.props.update();
-            this.props.onHide();
-            this.setState({ [e.target.name]: e.target.value });
-
           })
           .catch((error) => {
             console.log(error);
@@ -71,12 +67,9 @@ export default class AddEditAuthorForm extends React.Component {
       else {
 
         // add function
-        addauthor({ ...newAuthor })
+        addauthor(newAuthor)
           .then((res) => {
             this.props.update();
-            this.props.onHide();
-            this.setState({ [e.target.name]: e.target.value });
-
           })
           .catch((error) => {
             console.log(error);
@@ -85,6 +78,7 @@ export default class AddEditAuthorForm extends React.Component {
       this.setState({
         photourl: '', birthdate: '', firstname: '', lastname: ''
       });
+      this.props.onHide();
 
     }
     else {

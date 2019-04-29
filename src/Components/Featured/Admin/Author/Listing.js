@@ -15,6 +15,7 @@ export default class AuthorsAdminListing extends React.Component {
         }
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
+        this.updateauthors = this.updateauthors.bind(this);
 
     }
     handleClose = () => {
@@ -33,18 +34,19 @@ export default class AuthorsAdminListing extends React.Component {
             .catch((error) => {
                 console.log(error);
             });
-
-        this.updateauthors = () => {
-            getauthorsList()
-                .then((res) => {
-                    const data = res;
-                    this.setState({ Authors: data });
-                    console.log(res);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
+    }
+    updateauthors() {
+        getauthorsList()
+            .then((res) => {
+                debugger
+                const data = res;
+                this.setState({ Authors: data });
+                debugger
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
     render() {
         return (

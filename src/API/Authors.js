@@ -15,11 +15,12 @@ export const getauthorsList = () => {
 }
 
 ///////Add author
-export const addauthor = ({ ...newauthor }) => {
+export const addauthor = (newauthor) => {
 	return axios.post(`${BackendUrl}/api/authors/add`, {
 		// headers: {
 		// 	authorization: `Bearer ${this.localStorage.getItem('token')}`
-		// }, ...newauthor,
+		// }, 
+		newauthor,
 	})
 		.then(res =>
 			res.data
@@ -28,11 +29,12 @@ export const addauthor = ({ ...newauthor }) => {
 }
 
 //Edit author
-export const editauthor = ({ ...newauthor }) => {
+export const editauthor = (newauthor) => {
 	return axios.patch(`${BackendUrl}/api/authors/${newauthor._id}/edit`, {
 		// headers: {
 		// 	authorization: `Bearer ${this.localStorage.getItem('token')}`
-		// }, ...newauthor
+		// }, 
+		newauthor
 	})
 		.then(res =>
 			res.data
