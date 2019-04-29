@@ -69,8 +69,13 @@ export default class AuthorsAdminListing extends React.Component {
                             </thead>
                             <tbody>
 
-                                {!this.state.Authors.length ? <LoaderGIF /> :
-                                    this.state.Authors.filter(a => a.deleted === false).map(a => <AuthorAdminCard {...a} key={a._id} update={this.updateauthors} />)}
+                                {this.state.Authors ?
+                                    this.state.Authors.filter(a => a.deleted === false).map(a => <AuthorAdminCard {...a} key={a._id} update={this.updateauthors} />)
+                                    : <tr>
+                                        <td>
+                                            <LoaderGIF />
+                                        </td>
+                                    </tr>}
                             </tbody>
                         </Table>
                     </Col>

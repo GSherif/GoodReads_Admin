@@ -42,8 +42,8 @@ export default class BookAdminCard extends React.Component {
                     <td className="text-truncate">{this.props._id}</td>
                     <td className="text-truncate">{this.props.cover}</td>
                     <td className="text-truncate">{this.props.title}</td>
-                    <td className="text-truncate">{this.props.categoryId}</td>
-                    <td className="text-truncate">{this.props.authorId}</td>
+                    <td className="text-truncate">{this.props.categoryId._id}</td>
+                    <td className="text-truncate">{this.props.authorId._id}</td>
                     <td>
                         <i className="fas fa-edit" onClick={this.handleShow} />
                     </td>

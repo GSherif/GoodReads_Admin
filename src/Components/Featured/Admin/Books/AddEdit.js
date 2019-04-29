@@ -22,9 +22,9 @@ export default class AddEditBookForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        debugger
         axios.get(`${server}/api/authors/`)
             .then(data => {
+                debugger
                 this.setState({ Authors: data.data }, () => {
                     console.log(this.state);
                 })
@@ -34,8 +34,8 @@ export default class AddEditBookForm extends React.Component {
             });
         axios.get(`${server}/api/categories/`)
             .then(data => {
-                // debugger
-                this.setState({ Categories: data.data }, () => {
+                debugger
+                this.setState({ Categories: data.data.categories }, () => {
                     console.log(this.state);
                 })
             })
@@ -73,30 +73,29 @@ export default class AddEditBookForm extends React.Component {
             if (this.props.editmode) {
                 newBook._id = this.props._id;
                 // actionHandler(newBook); // edit function
-                try {
-                    EditBook(newBook);
-                    this.props.update();
-                }
-                catch (e) {
-                    console.log(e);
-                }
+                EditBook(newBook)
+                    .then(data => {
+                        debugger
+                        this.props.update();
+                    })
+                    .catch(err => {
+                        // this.props.history.push('/error');
+                        console.log(err);
+                    });;
             }
             else {
                 // actionHandler(newBook); // add function
-                try {
-                    AddBook(newBook).then(res => {
-                        console.log(this.props);
-                        this.props.update();
-                    }).catch(error => console.log(error));
-                }
-                catch (e) {
-                    console.log(e);
-                }
+
+                AddBook(newBook).then(res => {
+                    console.log(this.props);
+                    this.props.update();
+                }).catch(error => console.log(error));
 
             }
             this.setState({ title: "", authorId: "0", categoryId: "0", cover: "" });
             this.props.onHide();
         }
+
         else {
             this.setState({ errors: [...formValidatorCtx.validationErrors()] });
         }
@@ -131,7 +130,7 @@ export default class AddEditBookForm extends React.Component {
                                     <Form.Control as="select" name="categoryId" onChange={this.handleChange} value={this.state.categoryId}>
                                         <option key="0" value="0">Choose Category ...</option>
                                         {
-                                            this.state.Categories./*filter(c => c.deleted === false).*/map(c => <option key={c._id} value={c._id}>{c.name}</option>)
+                                            this.state.Categories./*filter(c => c.deleted === false).*/map(c => <option key={c._id} value={c._id}>{c.Name}</option>)
                                         }
                                     </Form.Control>
                                 </Form.Group>
@@ -141,7 +140,7 @@ export default class AddEditBookForm extends React.Component {
                                     <Form.Control as="select" name="authorId" onChange={this.handleChange} value={this.state.authorId}>
                                         <option key="0" value="0">Choose Author ...</option>
                                         {
-                                            this.state.Authors.filter(a => a.deleted === false).map(a => <option key={a._id} value={a._id}>{a.firstname + ' ' + a.lastname}</option>)
+                                            this.state.Authors.filter(a => !a.deleted).map(a => <option key={a._id} value={a._id}>{a.firstname + ' ' + a.lastname}</option>)
                                         }
                                     </Form.Control>
                                 </Form.Group>
