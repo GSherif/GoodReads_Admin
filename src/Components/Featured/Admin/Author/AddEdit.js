@@ -21,11 +21,12 @@ export default class AddEditAuthorForm extends React.Component {
       };
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
-  handleSubmit = () => (e) => {
+  handleSubmit(e) {
     e.preventDefault();
-    e.stopPropagation();
     const newAuthor = {
       id: uuidv1(),
       firstname: this.state.firstname,
@@ -58,8 +59,10 @@ export default class AddEditAuthorForm extends React.Component {
         newAuthor.id = this.props.id;
         editauthor({ ...newAuthor })
           .then((res) => {
-            console.log(res);
             this.props.update();
+            this.props.onHide();
+            this.setState({ [e.target.name]: e.target.value });
+
           })
           .catch((error) => {
             console.log(error);
@@ -70,8 +73,10 @@ export default class AddEditAuthorForm extends React.Component {
         // add function
         addauthor({ ...newAuthor })
           .then((res) => {
-            console.log(res);
             this.props.update();
+            this.props.onHide();
+            this.setState({ [e.target.name]: e.target.value });
+
           })
           .catch((error) => {
             console.log(error);
@@ -80,7 +85,7 @@ export default class AddEditAuthorForm extends React.Component {
       this.setState({
         photourl: '', birthdate: '', firstname: '', lastname: ''
       });
-      this.props.onHide();
+
     }
     else {
       this.setState({ errors: [...formValidatorCtx.validationErrors()] });
