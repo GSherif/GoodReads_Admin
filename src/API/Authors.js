@@ -51,15 +51,4 @@ export const deleteauthor = (id) => {
 		)
 		.catch(err => err)
 }
-///Get author details
-// export const getauthorDetails = () => {
-// 	return axios.get(`${BackendUrl}/api/authors/${id}`, {
-// 		headers: {
-// 			authorization: `Bearer ${this.localStorage.getItem('token')}`
-// 		}
-// 	})
-// 		.then(res =>
-// 			res.data
-// 		)
-// 		.catch(err => err)
-// }
+
