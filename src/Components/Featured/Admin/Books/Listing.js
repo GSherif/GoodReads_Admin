@@ -32,8 +32,10 @@ export default class BooksAdminListing extends React.Component {
         // });
         axios.get(`${server}/api/books/`)
             .then(data => {
-                // debugger
-                this.setState({ books: data.data });
+                debugger
+                this.setState({ books: data.data }, () => {
+                    console.log(this.state.books);
+                });
             })
             .catch(err => {
                 // this.props.history.push('/error');
@@ -45,14 +47,14 @@ export default class BooksAdminListing extends React.Component {
         axios.get(`${server}/api/books/`)
             .then(data => {
                 debugger
-                this.setState({ books: data.data });
+                this.setState({ books: data.data })
             })
             .catch(err => {
                 console.log(err);
             });
     }
     render() {
-        // console.log(this.state.books)
+        console.log(this.state.books)
         return (
             <Container fluid={true} className="p-2">
                 {this.state.showAddModal && <AddBookForm show={this.state.showAddModal} onHide={this.handleClose} editmode={false} update={this.updateBooks} />}
@@ -74,7 +76,7 @@ export default class BooksAdminListing extends React.Component {
                             </thead>
                             <tbody>
                                 {this.state.books &&
-                                    this.state.books.filter(b => b.deleted === false).map(b => <BookAdminCard {...b} key={b._id} />)}
+                                    this.state.books.filter(b => !b.deleted).map(b => <BookAdminCard {...b} key={b._id} update={this.updateBooks} />)}
                             </tbody>
                         </Table>
                     </Col>

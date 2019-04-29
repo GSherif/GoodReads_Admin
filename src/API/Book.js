@@ -28,20 +28,13 @@ export function GetBookById(id) {
         });
     return output;
 }
-export function EditBook(book) {
-    let output = {};
-    axios.patch(`${server}/api/books/${book._id}/edit`, {
+export async function EditBook(book) {
+    // let output = {};
+    return await axios.patch(`${server}/api/books/${book._id}/edit`, {
         ...book
     })
-        .then(data => {
-            debugger
-            output = data;
-        })
-        .catch(err => {
-            // this.props.history.push('/error');
-            console.log(err);
-        });
-    return output;
+
+    // return output;
 }
 export function DeleteBookById(id) {
     let output = {};

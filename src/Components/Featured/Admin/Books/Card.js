@@ -22,6 +22,8 @@ export default class BookAdminCard extends React.Component {
         this.setState({ showEditModal: true });
     }
     handleDelete() {
+        console.log(this.props);
+        debugger;
         axios.patch(`${server}/api/books/${this.props._id}/delete`)
             .then(res => {
                 debugger;
@@ -34,14 +36,15 @@ export default class BookAdminCard extends React.Component {
             });
     }
     render() {
+        console.log(this.props);
         return (
             <React.Fragment>
                 <tr className="no-gutters text-center">
                     <td className="text-truncate">{this.props._id}</td>
                     <td className="text-truncate">{this.props.cover}</td>
                     <td className="text-truncate">{this.props.title}</td>
-                    <td className="text-truncate">{this.props.categoryId}</td>
-                    <td className="text-truncate">{this.props.authorId}</td>
+                    <td className="text-truncate">{this.props.categoryId._id}</td>
+                    <td className="text-truncate">{this.props.authorId._id}</td>
                     <td>
                         <i className="fas fa-edit" onClick={this.handleShow} />
                     </td>
