@@ -4,7 +4,7 @@ import axios from 'axios';
 import { context } from '../../../../App';
 
 import EditBookForm from './AddEdit';
-
+import { server } from '../../../../API/Book';
 export default class BookAdminCard extends React.Component {
     constructor(props) {
         super(props);
@@ -22,7 +22,7 @@ export default class BookAdminCard extends React.Component {
         this.setState({ showEditModal: true });
     }
     handleDelete() {
-        axios.patch(`http://localhost:3000/api/books/${this.props._id}/delete`)
+        axios.patch(`${server}/api/books/${this.props._id}/delete`)
             .then(res => {
                 debugger;
                 this.props.update();
