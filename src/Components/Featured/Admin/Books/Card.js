@@ -22,6 +22,8 @@ export default class BookAdminCard extends React.Component {
         this.setState({ showEditModal: true });
     }
     handleDelete() {
+        console.log(this.props);
+        debugger;
         axios.patch(`${server}/api/books/${this.props._id}/delete`)
             .then(res => {
                 debugger;

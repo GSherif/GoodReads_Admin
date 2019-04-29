@@ -74,7 +74,7 @@ export default class BooksAdminListing extends React.Component {
                             </thead>
                             <tbody>
                                 {this.state.books &&
-                                    this.state.books.filter(b => b.deleted === false).map(b => <BookAdminCard {...b} key={b._id} />)}
+                                    this.state.books.filter(b => b.deleted === false).map(b => <BookAdminCard {...b} key={b._id} update={this.updateBooks} />)}
                             </tbody>
                         </Table>
                     </Col>

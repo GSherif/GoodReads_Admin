@@ -22,7 +22,7 @@ export default class AddEditBookForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        // debugger
+        debugger
         axios.get(`${server}/api/authors/`)
             .then(data => {
                 this.setState({ Authors: data.data }, () => {
