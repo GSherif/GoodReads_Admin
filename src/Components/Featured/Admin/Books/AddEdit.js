@@ -15,36 +15,43 @@ export default class AddEditBookForm extends React.Component {
             categoryId: this.props.editmode ? this.props.categoryId : "0",
             cover: this.props.editmode ? this.props.cover : "",
             errors: [],
-            Categories: [],
-            Authors: []
+            // Categories: [],
+            // Authors: []
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        axios.get(`${server}/api/authors`)
+        // debugger
+        axios.get(`${server}/api/authors/`)
             .then(data => {
-                this.setState({ Authors: data })
+                this.setState({ Authors: data.data }, () => {
+                    console.log(this.state);
+                })
             })
             .catch(err => {
                 console.log(err);
             });
-        axios.get(`${server}/api/categories`)
+        axios.get(`${server}/api/categories/`)
             .then(data => {
-                this.setState({ Categories: data })
+                // debugger
+                this.setState({ Categories: data.data }, () => {
+                    console.log(this.state);
+                })
             })
             .catch(err => {
                 console.log(err);
             });
     }
 
-    handleSubmit = (actionHandler) => (e) => {
+    handleSubmit(e) {
         e.preventDefault();
         let newBook = {
             title: this.state.title,
             authorId: this.state.authorId,
             categoryId: this.state.categoryId,
             cover: this.state.cover,
-            Delete: false
+            deleted: false
         }
 
         const formValidator = new SimpleSchema({
@@ -60,7 +67,9 @@ export default class AddEditBookForm extends React.Component {
         let formValidatorCtx = formValidator.newContext();
         formValidatorCtx.validate(formValidator.clean(newBook));
 
+        debugger
         if (formValidatorCtx.validationErrors().length === 0) {
+            debugger
             if (this.props.editmode) {
                 newBook._id = this.props._id;
                 // actionHandler(newBook); // edit function
@@ -74,9 +83,11 @@ export default class AddEditBookForm extends React.Component {
             }
             else {
                 // actionHandler(newBook); // add function
-                AddBook(newBook);
                 try {
-                    this.props.update();
+                    AddBook(newBook).then(res => {
+                        console.log(this.props);
+                        this.props.update();
+                    }).catch(error => console.log(error));
                 }
                 catch (e) {
                     console.log(e);
@@ -100,7 +111,7 @@ export default class AddEditBookForm extends React.Component {
                     <Modal.Title>{this.props.editmode ? "Edit Book" : "Add New Book"}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {!this.state.Categories.length ? <LoaderGIF /> :
+                    {this.state.Categories &&
                         <>
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId="title">
@@ -120,7 +131,7 @@ export default class AddEditBookForm extends React.Component {
                                     <Form.Control as="select" name="categoryId" onChange={this.handleChange} value={this.state.categoryId}>
                                         <option key="0" value="0">Choose Category ...</option>
                                         {
-                                            this.state.Categories.filter(c => c.deleted === false).map(c => <option key={c._id} value={c._id}>{c.name}</option>)
+                                            this.state.Categories./*filter(c => c.deleted === false).*/map(c => <option key={c._id} value={c._id}>{c.name}</option>)
                                         }
                                     </Form.Control>
                                 </Form.Group>
@@ -130,7 +141,7 @@ export default class AddEditBookForm extends React.Component {
                                     <Form.Control as="select" name="authorId" onChange={this.handleChange} value={this.state.authorId}>
                                         <option key="0" value="0">Choose Author ...</option>
                                         {
-                                            this.state.Authors.filter(a => a.deleted === false).map(a => <option key={a._id} value={a._id}>{a.firstName + ' ' + a.lastName}</option>)
+                                            this.state.Authors.filter(a => a.deleted === false).map(a => <option key={a._id} value={a._id}>{a.firstname + ' ' + a.lastname}</option>)
                                         }
                                     </Form.Control>
                                 </Form.Group>
