@@ -23,7 +23,7 @@ export default class AdminPanel extends React.Component {
                         <Books />
                     </Tab>
                     <Tab eventKey="authors" title="Authors">
-                        {/* <Authors /> */}
+                        <Authors />
                     </Tab>
                 </Tabs>
             </Container>

@@ -6,16 +6,19 @@ import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 
 import { context } from '../../../../App';
 import { GetAllBooks } from '../../../../API/Book';
+import { server, GetAllBooks } from '../../../../API/Book';
+import LoaderGIF from '../../../Shared/Loader/Loader';
 import LoaderGIF from '../../../Shared/Loader/Loader';
 
 import AddBookForm from './AddEdit';
 import BookAdminCard from './Card';
+>>>>>>> ac73359bc2424d4e83c4850f598e4fbe0c0df21e
 
 export default class BooksAdminListing extends React.Component {
     constructor() {
         super();
         this.state = {
-            books: [],
+            // books: [],
             showAddModal: false,
         }
         this.handleClose = this.handleClose.bind(this);
@@ -30,14 +33,38 @@ export default class BooksAdminListing extends React.Component {
     }
     componentDidMount() {
         this.setState({ books: GetAllBooks() });
+        // debugger;
+        // this.setState({ books: GetAllBooks() }, () => {
+        //     console.log(this.state.books);
+        // });
+        axios.get(`${server}/api/books/`)
+            .then(data => {
+                debugger
+                this.setState({ books: data.data }, () => {
+                    console.log(this.state.books);
+                });
+            })
+            .catch(err => {
+                // this.props.history.push('/error');
+                console.log(err);
+            });
     }
     updateBooks() {
-        this.setState({ books: GetAllBooks() });
+        // this.setState({ books: GetAllBooks() });
+        axios.get(`${server}/api/books/`)
+            .then(data => {
+                debugger
+                this.setState({ books: data.data })
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
     render() {
+        console.log(this.state.books)
         return (
             <Container fluid={true} className="p-2">
-                {this.state.showAddModal && <AddBookForm show={this.state.showAddModal} onHide={this.handleClose} editmode={false} />}
+                {this.state.showAddModal && <AddBookForm show={this.state.showAddModal} onHide={this.handleClose} editmode={false} update={this.updateBooks} />}
                 <Row className="no-gutters m-1 d-flex flex-row-reverse">
                     <Button className="align-self-end border-0 bg-darkgrey" onClick={this.handleShow}><i className="fas fa-book"></i> <i className="fas fa-plus"></i></Button>
                 </Row>
@@ -55,13 +82,8 @@ export default class BooksAdminListing extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {!this.state.books.length ?
-                                    <>
-                                        <tr colSpan={12}>
-                                            <td colSpan={12}><LoaderGIF /></td>
-                                        </tr>
-                                    </> :
-                                    this.state.books.filter(b => b.deleted === false).map(b => <BookAdminCard {...b} key={b._id} update={this.updateBooks} />)}
+                                {this.state.books &&
+                                    this.state.books.filter(b => !b.deleted).map(b => <BookAdminCard {...b} key={b._id} update={this.updateBooks} />)}
                             </tbody>
                         </Table>
                     </Col>

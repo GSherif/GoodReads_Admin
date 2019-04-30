@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { login } from '../../../API/admin';
-
-export default class LoginForm extends Component {
+import { withRouter } from 'react-router'
+class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +15,8 @@ export default class LoginForm extends Component {
         this.setState({ [fieldName]: e.target.value });
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
+        e.preventDefault();
         const { username, password } = this.state;
         debugger;
         login({ username, password })
@@ -31,7 +32,7 @@ export default class LoginForm extends Component {
     render() {
         const { username, password } = this.state;
         return (
-            <Form className='login bg-darkgrey form-border' onSubmit={this.handleSubmit()}>
+            <Form className='login bg-darkgrey form-border' onSubmit={this.handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label className="text-white">Username</Form.Label>
                     <Form.Control type="text" name="username" placeholder="Enter username" value={username} onChange={this.handleChange('username')} />
@@ -40,10 +41,11 @@ export default class LoginForm extends Component {
                     <Form.Label className="text-white">Password</Form.Label>
                     <Form.Control type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange('password')} />
                 </Form.Group>
-                <Button className="login-btn" type="submit">
+                <Button className="login-btn" type="submit" onClick={this.handleSubmit}>
                     Login
                 </Button>
             </Form>
         )
     }
 }
+export default withRouter(LoginForm);
