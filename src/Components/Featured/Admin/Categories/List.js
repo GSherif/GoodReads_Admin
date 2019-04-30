@@ -3,8 +3,6 @@ import Table from 'react-bootstrap/Table'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import { context } from '../../../../App';
-import AdminCategoryCard from './Card'
-import AdminCategoriesAddEditForm from './AddEditForm'
 
 export default class AdminCategoriesList extends React.Component {
 	constructor() {
