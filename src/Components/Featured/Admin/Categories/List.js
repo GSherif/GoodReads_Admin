@@ -1,52 +1,59 @@
-import React from 'react'
+import React,{Component} from 'react'
 import Table from 'react-bootstrap/Table'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
-import { context } from '../../../../App';
+import {GetAllCategories} from '../../../../API/Category';
 
-export default class AdminCategoriesList extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			Categories: [],
-			showAddModal: false,
-		}
-		this.handleShow = this.handleShow.bind(this);
-		this.handleClose = this.handleClose.bind(this);
-	}
+import AdminCategoryCard from './Card';
 
-	handleShow(e) {
-		this.setState({ showAddModal: true })
-	}
-	handleClose(e) {
-		this.setState({ showAddModal: false })
-	}
+
+export default class AdminCategoriesList extends Component {
+	state = {
+		categories: [],
+	  };
+	  
+	  componentDidMount() {
+		  
+		GetAllCategories().then(c => {
+		
+			this.setState({categories:c.categories},()=>{
+				console.log(this.state.categories)
+			});
+			
+		}).catch(err=>console.log(err))
+	  }
+
 	render() {
 		return (
-			<Container >
+			
+			 <Container>
+			 
 				<Row >
 					<Col sm={11}>
 					</Col>
 					<Col sm={1}>
-						<Button className="bg-darkgrey border-0" onClick={this.handleShow}><i className="fas fa-plus-circle text-white"></i></Button>
+						<Button className="bg-darkgrey border-0"><i className="fas fa-plus-circle text-white"></i></Button>
 					</Col>
 				</Row>
-				{this.state.showAddModal && <AdminCategoriesAddEditForm show={this.state.showAddModal} onHide={this.handleClose} editmode={false} />}
+			
 				<Table bordered hover responsive >
 					<thead>
 						<tr className=" text-center text-white bg-darkgrey" >
 							<th>ID</th>
 							<th>Name </th>
-							<th> Actions </th>
+							<th>Action </th>
 						</tr>
 					</thead>
-					{this.state.Categories.length &&
+					{this.state.categories.length &&
 						<tbody>
-							{this.state.Categories.map(c => <AdminCategoryCard key={c.id}  {...c} />)}
+						
+							{this.state.categories.map(c => 
+								
+								<AdminCategoryCard key={c.Id}  {...c} />)}
 						</tbody>
 					}
 				</Table>
 			</Container>
 		)
-	}
+				}
 }

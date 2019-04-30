@@ -1,7 +1,6 @@
 import React from 'react'
 import AdminCategoriesAddEditForm from './AddEditForm'
-import { context } from '../../../../App'
-	;
+import { context } from '../../../../App';
 
 export default class AdminCategoryCard extends React.Component {
 	constructor() {
@@ -23,8 +22,8 @@ export default class AdminCategoryCard extends React.Component {
 		const confirmation = window.confirm('Are you sure ,you want delete this category');
 		if (confirmation) {
 			const Categories = value.Categories.slice();
-			const id = this.props.id;
-			const categoryIndex = Categories.findIndex(c => c.id === id);
+			const id = this.props.Id;
+			const categoryIndex = Categories.findIndex(c => c.Id === id);
 			Categories[categoryIndex].deleted = true;
 			value.setCategories(Categories);
 		}
@@ -35,6 +34,7 @@ export default class AdminCategoryCard extends React.Component {
 
 
 	render() {
+		console.log(this.props);
 		return (
 			<context.Consumer>
 				{
@@ -42,7 +42,7 @@ export default class AdminCategoryCard extends React.Component {
 						<>
 							<tr className="no-gutters text-center">
 								<td>{this.props.id}   </td>
-								<td>{this.props.name}</td>
+								<td>{this.props.Name}</td>
 								<td>
 									<i className="fas fa-edit edit" onClick={this.handleShow} ></i>
 									<i className="fas fa-trash-alt" onClick={this.handleDelete(value)} ></i>

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Tabs, Container, Tab } from 'react-bootstrap';
 
 import Authors from './Author/Listing';
@@ -16,7 +17,7 @@ export default class AdminPanel extends React.Component {
             <Container fluid={true} className="p-2 tabs">
                 <Tabs className="link-mint" activekey={this.state.key} onSelect={key => this.setState({ key })}>
                     <Tab eventKey="category" title="Categories">
-                        {/* <Categories /> */}
+                        { <Categories /> }
                     </Tab>
                     <Tab eventKey="books" title="Books">
                         <Books />

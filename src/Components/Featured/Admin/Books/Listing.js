@@ -1,12 +1,15 @@
 import React from 'react';
-import axios from 'axios';
-import { Container, Row, Col, Button, Table } from 'react-bootstrap';
-import { context } from '../../../../App';
 
-import BookAdminCard from './Card';
-import AddBookForm from './AddEdit';
-import LoaderGIF from '../../../Shared/Loader/Loader';
+import axios from 'axios';
+
+import { Container, Row, Col, Button, Table } from 'react-bootstrap';
+
+import { context } from '../../../../App';
 import { GetAllBooks } from '../../../../API/Book';
+import LoaderGIF from '../../../Shared/Loader/Loader';
+
+import AddBookForm from './AddEdit';
+import BookAdminCard from './Card';
 
 export default class BooksAdminListing extends React.Component {
     constructor() {
@@ -26,7 +29,6 @@ export default class BooksAdminListing extends React.Component {
         this.setState({ showAddModal: true })
     }
     componentDidMount() {
-        debugger;
         this.setState({ books: GetAllBooks() });
     }
     updateBooks() {
